@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../pages/home_page.dart';
 
 void main() {
   runApp(const TodoApp());
@@ -15,14 +16,5 @@ class TodoApp extends StatelessWidget {
       home: const TodoHomePage(),
       debugShowCheckedModeBanner: false,
     );
-  }
-}
-
-class TodoHomePage extends StatelessWidget {
-  const TodoHomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(appBar: AppBar(title: const Text('My Todos')));
   }
 }
