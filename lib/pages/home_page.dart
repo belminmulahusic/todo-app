@@ -35,7 +35,11 @@ class TodoHomePage extends StatelessWidget {
             thickness: 10,
             height: 10,
           ),
-          TodoTile(taskName: 'Test task'),
+          TodoTile(
+            taskName: 'Do my homework in english',
+            isDone: false,
+            onChanged: (bool? value) => {},
+          ),
         ],
       ),
     );
