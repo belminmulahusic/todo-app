@@ -84,7 +84,7 @@ class _TodoHomePage extends State<TodoHomePage> {
             color: Colors.transparent,
             child: Opacity(
               opacity: 0.8,
-              child: Transform.scale(scale: 1.04, child: child),
+              child: Transform.scale(scale: 1.03, child: child),
             ),
           );
         },
