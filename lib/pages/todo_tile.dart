@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+import 'dart:math';
 
 class TodoTile extends StatelessWidget {
   final String taskName;
@@ -66,7 +66,7 @@ class TodoTile extends StatelessWidget {
                     vertical: 4,
                   ),
                   decoration: BoxDecoration(
-                    color: Colors.green.withValues(alpha: isDone ? 0.5 : 1),
+                    color: Colors.lightBlue,
                     borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
