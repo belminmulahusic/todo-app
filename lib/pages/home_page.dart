@@ -26,6 +26,10 @@ class _TodoHomePage extends State<TodoHomePage> {
     ['Whatup', false, 15],
   ];
 
+  int calculateDuration(index) {
+    return 0;
+  }
+
   void checkBoxChanged(bool? value, int index) {
     setState(() {
       tasks[index][1] = !tasks[index][1];
@@ -56,14 +60,32 @@ class _TodoHomePage extends State<TodoHomePage> {
           ),
         ),
       ),
-      body: ListView.builder(
+      body: ReorderableListView.builder(
         itemCount: tasks.length,
+        onReorder: (oldIndex, newIndex) {
+          setState(() {
+            if (newIndex > oldIndex) newIndex -= 1;
+            final item = tasks.removeAt(oldIndex);
+            tasks.insert(newIndex, item);
+          });
+        },
         itemBuilder: (context, index) {
           return TodoTile(
+            key: ValueKey(tasks[index][0]),
             taskName: tasks[index][0],
             isDone: tasks[index][1],
             minutes: tasks[index][2],
             onChanged: (value) => checkBoxChanged(value, index),
+          );
+        },
+        proxyDecorator: (Widget child, int index, Animation<double> animation) {
+          return Material(
+            elevation: 20,
+            color: Colors.transparent,
+            child: Opacity(
+              opacity: 0.8,
+              child: Transform.scale(scale: 1.04, child: child),
+            ),
           );
         },
       ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class TodoTile extends StatelessWidget {
   final String taskName;
@@ -24,52 +25,61 @@ class TodoTile extends StatelessWidget {
           color: Color.fromARGB(255, 79, 193, 255),
           borderRadius: BorderRadius.circular(20),
         ),
-        child: Row(
-          children: [
-            Checkbox(
-              value: isDone,
-              onChanged: onChanged,
-              activeColor: const Color.fromARGB(255, 187, 230, 255),
-              checkColor: const Color.fromARGB(255, 0, 44, 78),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(15.0),
+        child: Opacity(
+          opacity: isDone ? 0.5 : 1.0,
+          child: Row(
+            children: [
+              Checkbox(
+                value: isDone,
+                onChanged: onChanged,
+                activeColor: const Color.fromARGB(255, 187, 230, 255),
+                checkColor: const Color.fromARGB(255, 0, 44, 78),
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: const Color.fromARGB(255, 79, 193, 255),
+                    ),
+                    child: Text(
+                      taskName,
+                      style: TextStyle(
+                        fontSize: 18,
+                        decoration:
+                            isDone
+                                ? TextDecoration.lineThrough
+                                : TextDecoration.none,
+                      ),
+                      overflow: TextOverflow.visible,
+                      maxLines: null,
+                    ),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 12.0),
                 child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 4,
+                  ),
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: const Color.fromARGB(255, 79, 193, 255),
+                    color: Colors.green.withValues(alpha: isDone ? 0.5 : 1),
+                    borderRadius: BorderRadius.circular(6),
                   ),
                   child: Text(
-                    taskName,
-                    style: const TextStyle(fontSize: 18),
-                    overflow: TextOverflow.visible,
-                    maxLines: null,
+                    minutes.toString(),
+                    style: TextStyle(
+                      color: Colors.white.withValues(alpha: isDone ? 0.5 : 1),
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 12.0),
-              child: Container(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 4,
-                ),
-                decoration: BoxDecoration(
-                  color: const Color.fromARGB(255, 12, 170, 20),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Text(
-                  minutes.toString(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
