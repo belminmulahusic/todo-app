@@ -100,7 +100,7 @@ class _TodoHomePage extends State<TodoHomePage> {
         foregroundColor: Colors.blue,
         backgroundColor: Colors.white,
         splashColor: const Color.fromARGB(255, 175, 230, 255),
-        onPressed: createNewTask,
+        onPressed: showAddTaskDialog,
         isExtended: true,
         enableFeedback: true,
         child: Icon(Icons.edit),
@@ -108,9 +108,9 @@ class _TodoHomePage extends State<TodoHomePage> {
     );
   }
 
-  void createNewTask() {
+  void createNewTask(task) {
     setState(() {
-      tasks.add(["Hi", false, 10]);
+      tasks.add(task);
     });
   }
 
@@ -121,6 +121,37 @@ class _TodoHomePage extends State<TodoHomePage> {
       appBar: buildAppBar(),
       body: buildTodoList(),
       floatingActionButton: buildFloatingButton(),
+    );
+  }
+
+  void showAddTaskDialog() {
+    final controller = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder:
+          (_) => AlertDialog(
+            title: Text("Create new task"),
+            content: TextField(
+              controller: controller,
+              decoration: InputDecoration(hintText: "new task"),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  String task = controller.text;
+                  if (task.isNotEmpty) {
+                    setState(() {
+                      tasks.add([task, false, 0]);
+                    });
+                  }
+                  Navigator.pop(context);
+                },
+                child: Text("Save"),
+              ),
+              TextButton(onPressed: () {}, child: Text("Cancel")),
+            ],
+          ),
     );
   }
 }
